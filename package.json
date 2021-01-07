@@ -1,14 +1,14 @@
 {
   "name": "mfxp",
   "version": "0.0.0-rc.0",
-  "description": "",
+  "description": "Microfrontend Experiences",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "UNKNOWN",
   "dependencies": {
     "globalthis": "^1.0.2"
   },
@@ -16,5 +16,13 @@
     "history": "^5.0.0",
     "react": "^17.0.2",
     "react-router-dom": "^5.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mobilelive-inc/mfxp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mobilelive-inc/mfxp/issues"
+  },
+  "homepage": "https://github.com/mobilelive-inc/mfxp#readme"
 }
