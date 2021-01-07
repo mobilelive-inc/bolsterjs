@@ -67,7 +67,7 @@ mfxp.withMfxp = (cmp) => {
   }
 }
 
-mfxp.getContextType = () => global[kMfxp]
+mfxp.getMfxpContextType = () => global[kMfxp]
 
 mfxp.StandaloneExperience = () => null
 
