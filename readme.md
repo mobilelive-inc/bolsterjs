@@ -33,8 +33,8 @@ The main exported function accepts a promise that must resolve to a dynamic impo
 
 When the component is instantiated, any props passed form the basis for application state
 between the Container and the Experience which can be retrieved in any component within any
-given experience with the [`useMfxp` hook](#usemfxp), the [`withMfxp` HOC](#withmfxp),
-the [`MfxpConsumer`](#mfxp-consumer) or using the [`getMfxpContextType` function](#get--mfxp-context-type) 
+given experience with the [`useMfxp` hook](#usemfxp--state), the [`withMfxp` HOC](#withmfxpcomponent--higherorderreactcomponent),
+the [`MfxpConsumer`](#mfxpconsumer--reactcomponent) or using the [`getMfxpContextType` function](#getmfxpcontexttype--reactcontext) 
 to retrieve the necessary context object for setting a `contextType` static on a React Class Component.
 
 When called, the `mfxp` function returns a [Lazy React Component](https://reactjs.org/docs/code-splitting.html#reactlazy) which **MUST** be used within a `React.Suspense` component which in turn **MUST** be within 
@@ -271,7 +271,7 @@ Advanced use only. This is used internally by the `experience` function to assig
 
 The `mfxp.wrap` function can be used to mount any-non React Microfrontend Experience into a Container application.
 
-Non-React Microfrontend Experiences can not use the [`experience`](#experience) function for the bootstrapping
+Non-React Microfrontend Experiences can not use the [`experience`](#experiencerootcomponent-renderfunction-standaloneexperience) function for the bootstrapping
 entrypoint. They must instead export a `mount` function. 
 
 The exported `mount` function will be passed two arguments: the DOM element to mount at, and a props object
