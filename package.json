@@ -1,5 +1,5 @@
 {
-  "name": "mfxp",
+  "name": "@mobilelive-inc/mfxp",
   "version": "0.0.0-rc.0",
   "description": "Microfrontend Experiences",
   "main": "index.js",
