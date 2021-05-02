@@ -1,0 +1,7 @@
+MXFP command line interface available commands are:
+
+  * create                create a micro-frontend project
+  * version               the current fastify-cli version
+  * help                  help about commands
+
+Launch 'mfxp help [command]' to learn more about each command.
