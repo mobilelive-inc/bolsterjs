@@ -299,3 +299,15 @@ if (process.env.NODE_ENV === 'development') {
 ```
 
 ## CLI
+
+`mfxp` exposes a binary that allows any user to generate a __Micro FrontEnd Experience__ or __Micro FrontEnd Container__ initial skeleton.
+
+In order to generate an initial project initialize the `mfxp` binary with the arguments `create` and the name of your project.
+
+```sh
+npx @mobilelive-inc/mfxp create <name of project>
+```
+
+You can also install `@mobilelive-inc/mfxp` in your global `node_modules` and execute `mpfx create <name of project>`.
+
+Once a project has being generated simply follow the instructions on your command line, and start creating your micro frontend application.
