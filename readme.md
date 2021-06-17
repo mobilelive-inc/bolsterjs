@@ -26,7 +26,7 @@ The library is built to work with WebPack Module Federation.
 The default export is a function, referred to as `mfxp`.
 Other documented APIs are named exports.
 
-### `mfxp(import('my-app/experience')) => LazyReactComponent` 
+### `mfxp(import('my-app/experience'))` => LazyReactComponent
 
 The main exported function accepts a promise that must resolve to a dynamic import object
 (e.g. the result of calling the dynamic `import` function).
