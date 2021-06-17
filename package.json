@@ -3,6 +3,9 @@
   "version": "0.0.0-rc.0",
   "description": "Microfrontend Experiences",
   "main": "index.js",
+  "bin": {
+    "mfxp": "./bin/cmd.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +13,9 @@
   "author": "",
   "license": "UNKNOWN",
   "dependencies": {
+    "@mobilelive-inc/mfxp-generator": "0.0.0-rc.1",
+    "ansi-colors": "^4.1.1",
+    "commist": "^2.0.0",
     "globalthis": "^1.0.2"
   },
   "devDependencies": {
