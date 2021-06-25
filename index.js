@@ -77,7 +77,7 @@ mfxp.getMfxpContextType = () => global[kMfxp]
 
 mfxp.StandaloneExperience = () => null
 
-mfxp.experience = (root, render, standalone = {}, navigationFunction = createBrowserHistory) => {
+mfxp.experience = (root, render, standalone = {}) => {
   const inject = (el, history, state) => {
     const tree = createElement(mfxp.MfxpProvider, {
       state: state,
@@ -108,7 +108,7 @@ mfxp.experience = (root, render, standalone = {}, navigationFunction = createBro
 
   if (process.env.NODE_ENV === 'development') {
     const devRoot = document.querySelector('#dev-preview')
-    if (devRoot) inject(devRoot, navigationFunction(), standalone.props)
+    if (devRoot) inject(devRoot, createBrowserHistory(), standalone.props)
   }
 
   return { mount }
