@@ -142,23 +142,6 @@ export default experience(
 When any Microfrontend Experience is viewed in standalone mode, `mfxp` expects an element with id `#dev-preview`
 that it can automatically mount to.
 
-### History Object 
-
-A history object to use for navigation, by default the experience implements `createBrowserHistory`.
-
-The `./src/bootstrap.js` file can use `experience` as follows:
-
-```js
-import ReactDOM from 'react-dom'
-import { createMemoryHistory } from 'history'
-import App from './App'
-import { experience } from 'mfxp'
-
-export default experience(App, ReactDOM.render, <StandaloneExperience />, createMemoryHistory)
-```
-
-
-
 ### `useMfxp()` => state
 
 The `useMfxp` hook can be called in any functional component in an Experience, and it will return the Container level state for that Experience, and only for that Experience. By design, state in other Experiences cannot be accessed directly.
