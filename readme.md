@@ -65,7 +65,7 @@ export default () => {
 }
 ```
 
-### `experience(RootComponent, renderFunction, [<StandaloneExperience/>])`
+### `experience(RootComponent, renderFunction, [<StandaloneExperience/>], [history object])`
 
 The result of `experience` should be the default export of the endpoint
 exposed by the `ModuleFederationPlugin` in a WebPack configuration file. 
@@ -135,12 +135,29 @@ import { experience } from 'mfxp'
 export default experience(
   App, 
   ReactDOM.render,
-  <StandaloneExpererience some="dummy" state="that the experience expects the container to usually provide">
+  <StandaloneExperience some="dummy" state="that the experience expects the container to usually provide">
 )
 ```
 
 When any Microfrontend Experience is viewed in standalone mode, `mfxp` expects an element with id `#dev-preview`
 that it can automatically mount to.
+
+### History Object 
+
+A history object to use for navigation, by default the experience implements `createBrowserHistory`.
+
+The `./src/bootstrap.js` file can use `experience` as follows:
+
+```js
+import ReactDOM from 'react-dom'
+import { createMemoryHistory } from 'history'
+import App from './App'
+import { experience } from 'mfxp'
+
+export default experience(App, ReactDOM.render, <StandaloneExperience />, createMemoryHistory)
+```
+
+
 
 ### `useMfxp()` => state
 
