@@ -20,7 +20,8 @@
     "@mobilelive-inc/mfxp-generator": "^0.0.0-rc.7",
     "ansi-colors": "^4.1.1",
     "commist": "^2.0.0",
-    "globalthis": "^1.0.2"
+    "globalthis": "^1.0.2",
+    "react-shallow-renderer": "^16.14.1"
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.7",
