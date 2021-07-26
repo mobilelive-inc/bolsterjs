@@ -1,0 +1,5 @@
+  
+Usage: mfxp create [app name]
+
+Generates a sample MXFP named [app name] micro frontend application
+with a simple configuration.
