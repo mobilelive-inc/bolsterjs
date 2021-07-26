@@ -17,10 +17,11 @@
   "author": "",
   "license": "UNKNOWN",
   "dependencies": {
-    "@mobilelive-inc/mfxp-generator": "^0.0.0-rc.8",
+    "@mobilelive-inc/mfxp-generator": "^0.0.0-rc.9",
     "ansi-colors": "^4.1.1",
     "commist": "^2.0.0",
     "globalthis": "^1.0.2",
+    "help-me": "^2.0.1",
     "react-shallow-renderer": "^16.14.1"
   },
   "devDependencies": {
