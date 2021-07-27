@@ -27,12 +27,15 @@
     "react-shallow-renderer": "^16.14.1"
   },
   "devDependencies": {
+    "@testing-library/dom": "^7.31.2",
     "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^13.2.1",
     "esm": "^3.2.25",
     "global-jsdom": "^8.1.0",
     "history": "^5.0.0",
     "jsdom": "^16.6.0",
     "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "snazzy": "^9.0.0",
     "standard": "^16.0.3",
