@@ -4,8 +4,8 @@ import React, { Suspense } from 'react'
 import { Link, Router, Route, Switch } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import userEvent from '@testing-library/user-event'
-import { render, screen } from '@testing-library/react'
-import { test } from 'tap'
+import { render, screen, cleanup } from '@testing-library/react'
+import { test, beforeEach } from 'tap'
 
 import mfxp from '..'
 
@@ -22,6 +22,8 @@ import mfxp from '..'
  *
  * Test with a container that wrap doesn't trigger any navigation
  */
+
+beforeEach(cleanup)
 
 test('Mfxp wrapped experience inside of container does accesses global state using withMfxp', async () => {
   function SimpleRootPageComponent ({ welcome }) {
@@ -210,6 +212,6 @@ test('Mfxp wrapped experience uses react router to navigate properly', async () 
   )
 
   render(<App />)
-  await screen.findByText('About')
   userEvent.click(screen.getByText('About'))
+  await screen.findByText('You are on the about')
 })
