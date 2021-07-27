@@ -1,8 +1,9 @@
 import 'global-jsdom/esm/register'
 
 import React, { Suspense } from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
+import { Link, Router, Route, Switch } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
+import userEvent from '@testing-library/user-event'
 import { render, screen } from '@testing-library/react'
 import { test } from 'tap'
 
@@ -159,4 +160,56 @@ test('Mfxp wrapped experience inside of container must access container props', 
 
   render(<ContainerHelper />)
   await screen.findByText('passes')
+})
+
+test('Mfxp wrapped experience uses react router to navigate properly', async () => {
+  const About = ({ history }) => (
+    <Router history={history}>
+      <Switch>
+        <Route path='/about'>
+          <div>You are on the about page</div>
+        </Route>
+      </Switch>
+    </Router>
+  )
+
+  const Home = ({ history }) => (
+    <Router history={history}>
+      <Switch>
+        <Route path='/'>
+          <div>You are home</div>
+        </Route>
+      </Switch>
+    </Router>
+  )
+
+  const MFXPHomeExperience = mfxp(mfxp.experience(Home, render))
+  const MFXPAboutExp = mfxp(mfxp.experience(About, render))
+
+  const history = createBrowserHistory()
+
+  const App = () => (
+    <div>
+      <Router history={history}>
+        <Link to='/'>Home</Link>
+        <Link to='/about'>About</Link>
+        <Suspense fallback='...loading'>
+          <Switch>
+            <Route exact path='/'>
+              <MFXPHomeExperience />
+            </Route>
+
+            <Route path='/about'>
+              <MFXPAboutExp />
+            </Route>
+
+          </Switch>
+        </Suspense>
+      </Router>
+    </div>
+  )
+
+  render(<App />)
+  await screen.findByText('About')
+  userEvent.click(screen.getByText('About'))
 })
