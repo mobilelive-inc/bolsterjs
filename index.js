@@ -79,9 +79,8 @@ mfxp.getMfxpContextType = () => global[kMfxp]
 mfxp.StandaloneExperience = (props) => createElement('div', props)
 
 mfxp.experience = (root, render, standalone = {}) => {
-  
   const re = new Rsr()
-  
+
   const inject = (el, history, state) => {
     const tree = createElement(mfxp.MfxpProvider, {
       state: state,
@@ -91,7 +90,6 @@ mfxp.experience = (root, render, standalone = {}) => {
   }
 
   const mount = (el, { onNavigate, initialPath, ...state }) => {
-
     const history = createMemoryHistory({
       initialEntries: [initialPath]
     })
@@ -110,7 +108,7 @@ mfxp.experience = (root, render, standalone = {}) => {
       }
     }
   }
-  
+
   if (process.env.NODE_ENV === 'development') {
     const devRoot = document.querySelector('#dev-preview')
     const props = standalone.type === this.StandaloneExperience ? standalone.props : re.render(standalone).props
