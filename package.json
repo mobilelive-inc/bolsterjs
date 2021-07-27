@@ -10,6 +10,7 @@
     "cjs": true
   },
   "scripts": {
+    "fix": "standard --fix",
     "test": "tap --node-arg=--require=esm --jsx test/*.*",
     "lint": "standard | snazzy",
     "check": "npm run lint && npm run test"
