@@ -11,7 +11,8 @@
   },
   "scripts": {
     "test": "tap --node-arg=--require=esm --jsx test/*.*",
-    "lint": "standard | snazzy"
+    "lint": "standard | snazzy",
+    "check": "npm run lint && npm run test"
   },
   "keywords": [],
   "author": "",
