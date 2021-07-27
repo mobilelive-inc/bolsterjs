@@ -5,7 +5,7 @@
 const cmd = require('commist')()
 const path = require('path')
 const help = require('help-me')({
-  dir: path.join(path.dirname(require.main.filename), '../','help')
+  dir: path.join(path.dirname(require.main.filename), '../', 'help')
 })
 const MFXPCmd = require('@mobilelive-inc/mfxp-generator')
 const { red, green, yellow, blueBright } = require('ansi-colors')
