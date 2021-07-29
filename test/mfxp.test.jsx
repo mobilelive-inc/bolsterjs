@@ -1,27 +1,13 @@
 import 'global-jsdom/esm/register'
 
 import React, { Suspense } from 'react'
-import { Link, Router, Route, Switch } from 'react-router-dom'
+import { Link, Router, Route, Switch, BrowserRouter } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import userEvent from '@testing-library/user-event'
 import { render, screen, cleanup } from '@testing-library/react'
 import { test, beforeEach } from 'tap'
 
 import mfxp from '..'
-
-/*
- *
- * Test with a mock container, that a mock element contained inside the container
- * when using mfxp experience and navigates, the parent communicates back where it went to
- * when using onParentNavigate.
- *
- * Test with a mock container, that a mock element contained inside the container
- * when using mfxp experience, the experience has access to some piece of state
- *
- * Test without a container that an experience gets render into a dev-preview element by default
- *
- * Test with a container that wrap doesn't trigger any navigation
- */
 
 beforeEach(cleanup)
 
@@ -165,53 +151,61 @@ test('Mfxp wrapped experience inside of container must access container props', 
 })
 
 test('Mfxp wrapped experience uses react router to navigate properly', async () => {
-  const About = ({ history }) => (
-    <Router history={history}>
-      <Switch>
-        <Route path='/about'>
-          <div>You are on the about page</div>
-        </Route>
-      </Switch>
-    </Router>
-  )
-
-  const Home = ({ history }) => (
-    <Router history={history}>
-      <Switch>
-        <Route path='/'>
-          <div>You are home</div>
-        </Route>
-      </Switch>
-    </Router>
-  )
-
-  const MFXPHomeExperience = mfxp(mfxp.experience(Home, render))
-  const MFXPAboutExp = mfxp(mfxp.experience(About, render))
-
-  const history = createBrowserHistory()
-
-  const App = () => (
-    <div>
+  function About ({ history }) {
+    return (
       <Router history={history}>
-        <Link to='/'>Home</Link>
-        <Link to='/about'>About</Link>
-        <Suspense fallback='...loading'>
-          <Switch>
-            <Route exact path='/'>
-              <MFXPHomeExperience />
-            </Route>
-
-            <Route path='/about'>
-              <MFXPAboutExp />
-            </Route>
-
-          </Switch>
-        </Suspense>
+        <Switch>
+          <Route path='/about'>
+            <div>You are on the about page</div>
+            <Link to='/'>Go back</Link>
+          </Route>
+        </Switch>
       </Router>
-    </div>
-  )
+    )
+  }
+
+  function Home ({ history }) {
+    return (
+      <Router history={history}>
+        <Switch>
+          <Route path='/'>
+            <div>You are home</div>
+          </Route>
+        </Switch>
+      </Router>
+    )
+  }
+
+  const MFXPAboutExp = mfxp(mfxp.experience(About, render))
+  const MFXPHomeExp = mfxp(mfxp.experience(Home, render))
+
+  function App () {
+    return (
+      <div>
+        <BrowserRouter>
+          <Link to='/'>Home</Link>
+          <Link to='/about'>About</Link>
+          <Suspense fallback='...loading'>
+            <Switch>
+
+              <Route path='/about'>
+                <MFXPAboutExp />
+              </Route>
+              <Route path='/'>
+                <MFXPHomeExp />
+              </Route>
+
+            </Switch>
+          </Suspense>
+        </BrowserRouter>
+      </div>
+    )
+  }
 
   render(<App />)
+  await screen.findByText('You are home')
   userEvent.click(screen.getByText('About'))
-  await screen.findByText('You are on the about')
+  await screen.findByText('You are on the about page')
+  userEvent.click(screen.getByText('Go back'))
+  await screen.findAllByText('You are home')
 })
