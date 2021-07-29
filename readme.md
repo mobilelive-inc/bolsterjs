@@ -16,8 +16,8 @@ The `mfxp` nanoframework provides an API library for integrating Microfrontend E
 The library relies on the parent dependant to have the following installed:
 
 * `react` (17+)
-* `react-dom-router` (v5+)
-* `history` (v5+)
+* `react-router-dom` (v5+)
+* `history` (v4.9.0) (Shipped with react-router-dom)
 
 The library is built to work with WebPack Module Federation.
 
