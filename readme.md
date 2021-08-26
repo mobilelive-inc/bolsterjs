@@ -1,10 +1,13 @@
-# mfxp
+
+<div style="text-align:center"><img src="./docs/Logo-Bolster.png" /></div>
+
+# BolsterJS
 
 > Microfrontend Experiences
 
 A lateral nanoframework that faciliates best practices and conventions for integrating Microfrontend Experiences together.
 
-The `mfxp` nanoframework provides an API library for integrating Microfrontend Experiences together and a CLI tool for rapidly scaffolding Microfrontend Experiences with the `mfxp` library already setup.
+`BolsterJS` nanoframework provides an API library for integrating Microfrontend Experiences (`mfxps`) together and a CLI tool for rapidly scaffolding Microfrontend Experiences with the `BolsterJS` library already setup.
 
 ## Terms
 
@@ -44,7 +47,7 @@ a [React Router](https://reactrouter.com/) component.
 import React, { Suspense } from 'react'
 import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
-import mfxp from 'mfxp'
+import mfxp from 'bolster'
 const history = createBrowserHistory()
 const HomeExperience = mfxp(import('home/experience'))
 const BookingExperience = mfxp(import('booking/experience'))
@@ -113,7 +116,7 @@ The `./src/bootstrap.js` file can use `experience` as follows:
 ```js
 import ReactDOM from 'react-dom'
 import App from './App'
-import { experience } from 'mfxp'
+import { experience } from 'bolster'
 
 export default experience(App, ReactDOM.render)
 ```
@@ -130,7 +133,7 @@ only every be passed to the `experience` function.
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import { experience } from 'mfxp'
+import { experience } from 'bolster'
 
 export default experience(
   App, 
@@ -275,7 +278,7 @@ Non-React Microfrontend Experiences can not use the [`experience`](#experiencero
 entrypoint. They must instead export a `mount` function. 
 
 The exported `mount` function will be passed two arguments: the DOM element to mount at, and a props object
-for any props specified on the `LazyReactComponent` returned from `mfxp.wrap`.
+for any props specified on the `LazyReactComponent` returned from `bolster.wrap`.
 
 The following is an example `./src/bootstrap.js` file from a Vue-based Microfrontend Experience:
 
@@ -300,14 +303,14 @@ if (process.env.NODE_ENV === 'development') {
 
 ## CLI
 
-`mfxp` exposes a binary that allows any user to generate a __Micro FrontEnd Experience__ or __Micro FrontEnd Container__ initial skeleton.
+`BolsterJS` exposes a binary that allows any user to generate a __Micro FrontEnd Experience__ or __Micro FrontEnd Container__ initial skeleton.
 
-In order to generate an initial project initialize the `mfxp` binary with the arguments `create` and the name of your project.
+In order to generate an initial project initialize the `bolster` binary with the arguments `create` and the name of your project.
 
 ```sh
-npx @mobilelive-inc/mfxp create <name of project>
+npx @mobilelive-inc/bolster create <name of project>
 ```
 
-You can also install `@mobilelive-inc/mfxp` in your global `node_modules` and execute `mpfx create <name of project>`.
+You can also install `@mobilelive-inc/bolster` in your global `node_modules` and execute `bolster create <name of project>`.
 
 Once a project has being generated simply follow the instructions on your command line, and start creating your micro frontend application.
