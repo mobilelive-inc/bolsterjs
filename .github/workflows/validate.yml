@@ -16,10 +16,6 @@ jobs:
           scope: "@mobilelive-inc"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
-    
-      - name: Authenticate with the GitHub Package Registry
-        run:
-          echo "@mobilelive-inc:registry=https://npm.pkg.github.com/mobilelive-inc\n//npm.pkg.github.com/:_authToken=${{ secrets.GH_PUBLISH_TOKEN }}\nregistry=https://registry.npmjs.org/" > ~/.npmrc
 
       - run: npm install
         env:
