@@ -1,5 +1,5 @@
 
-<div style="text-align:center"><img src="./docs/Logo-Bolster.png" /></div>
+<div style="text-align:center"><img height="116px" src="./docs/Icon-Bolster.png" /><img height="96px" src="./docs/Word-Bolster.png" /></div>
 
 # BolsterJS
 
