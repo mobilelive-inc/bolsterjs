@@ -14,6 +14,8 @@ jobs:
           node-version: ${{ matrix.node_version }}
           registry-url: https://npm.pkg.github.com/
           scope: "@mobilelive-inc"
+      - run:
+          echo "//npm.pkg.github.com:_authToken=${{ secrets.GH_PUBLISH_TOKEN }}" > ~/.npmrc
       - run: npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PUBLISH_TOKEN }}
