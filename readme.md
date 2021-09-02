@@ -7,7 +7,7 @@
 
 A lateral nanoframework that faciliates best practices and conventions for integrating Microfrontend Experiences together.
 
-`BolsterJS` nanoframework provides an API library for integrating Microfrontend Experiences (`mfxps`) together and a CLI tool for rapidly scaffolding Microfrontend Experiences with the `BolsterJS` library already setup.
+`BolsterJS` nanoframework provides an API library for integrating Microfrontend Experiences together and a CLI tool for rapidly scaffolding Microfrontend Experiences with the `BolsterJS` library already setup.
 
 ## Terms
 
@@ -26,31 +26,31 @@ The library is built to work with WebPack Module Federation.
 
 ## API
 
-The default export is a function, referred to as `mfxp`.
+The default export is a function, referred to as `bolster`.
 Other documented APIs are named exports.
 
-### `mfxp(import('my-app/experience'))` => LazyReactComponent
+### `bolster(import('my-app/experience'))` => LazyReactComponent
 
 The main exported function accepts a promise that must resolve to a dynamic import object
 (e.g. the result of calling the dynamic `import` function).
 
 When the component is instantiated, any props passed form the basis for application state
 between the Container and the Experience which can be retrieved in any component within any
-given experience with the [`useMfxp` hook](#usemfxp--state), the [`withMfxp` HOC](#withmfxpcomponent--higherorderreactcomponent),
-the [`MfxpConsumer`](#mfxpconsumer--reactcomponent) or using the [`getMfxpContextType` function](#getmfxpcontexttype--reactcontext) 
+given experience with the [`useBolster` hook](#usebolster--state), the [`withBolster` HOC](#withbolstercomponent--higherorderreactcomponent),
+the [`BolsterConsumer`](#bolsterconsumer--reactcomponent) or using the [`getBolsterContextType` function](#getbolstercontexttype--reactcontext) 
 to retrieve the necessary context object for setting a `contextType` static on a React Class Component.
 
-When called, the `mfxp` function returns a [Lazy React Component](https://reactjs.org/docs/code-splitting.html#reactlazy) which **MUST** be used within a `React.Suspense` component which in turn **MUST** be within 
+When called, the `bolster` function returns a [Lazy React Component](https://reactjs.org/docs/code-splitting.html#reactlazy) which **MUST** be used within a `React.Suspense` component which in turn **MUST** be within 
 a [React Router](https://reactrouter.com/) component.
 
 ```js
 import React, { Suspense } from 'react'
 import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
-import mfxp from 'bolster'
+import bolster from 'bolster'
 const history = createBrowserHistory()
-const HomeExperience = mfxp(import('home/experience'))
-const BookingExperience = mfxp(import('booking/experience'))
+const HomeExperience = bolster(import('home/experience'))
+const BookingExperience = bolster(import('booking/experience'))
 
 export default () => {
   <Router history={history}>
@@ -142,12 +142,12 @@ export default experience(
 )
 ```
 
-When any Microfrontend Experience is viewed in standalone mode, `mfxp` expects an element with id `#dev-preview`
+When any Microfrontend Experience is viewed in standalone mode, `bolster` expects an element with id `#dev-preview`
 that it can automatically mount to.
 
-### `useMfxp()` => state
+### `useBolster()` => state
 
-The `useMfxp` hook can be called in any functional component in an Experience, and it will return the Container level state for that Experience, and only for that Experience. By design, state in other Experiences cannot be accessed directly.
+The `useBolster` hook can be called in any functional component in an Experience, and it will return the Container level state for that Experience, and only for that Experience. By design, state in other Experiences cannot be accessed directly.
 
 This state is set by passing props when initializing the Experience. State can be communicated back up to the Container
 application by setting props to functions that when called, update the application level state.
@@ -167,14 +167,14 @@ in the parent Container app like so:
 ```js
 // THIS IS A COMPONENT IN AN EXPERIENCE APP
 export default function MyComponent () {
-  const { changeUser } = useMfxp()
+  const { changeUser } = useBolster()
   return <div><button onClick={() => changeUser('Bob')}>Set user to Bob</button></div>
 }
 ```
 
-### `withMfxp(Component)` => HigherOrderReactComponent
+### `withBolster(Component)` => HigherOrderReactComponent
 
-The `withMfxp` Higher Order Component creator function can be wrapped around any React component and to map
+The `withBolster` Higher Order Component creator function can be wrapped around any React component and to map
 Container level state for that Experience (and only for that Experience) to the props of the component it 
 has wrapped.
 
@@ -195,7 +195,7 @@ in the parent Container app like so:
 
 ```js
 // THIS IS A COMPONENT IN AN EXPERIENCE APP
-export default withMfxp(function MyComponent ({ changeUser }) {
+export default withBolster(function MyComponent ({ changeUser }) {
   return <div><button onClick={() => changeUser('Bob')}>Set user to Bob</button></div>
 })
 ```
@@ -204,8 +204,8 @@ This can also be used with Class-based components:
 
 ```js
 // THIS IS A COMPONENT IN AN EXPERIENCE APP
-export default withMfxp(class MyClassComponent {
-  static contextType = getMfxpContextType()
+export default withBolster(class MyClassComponent {
+  static contextType = getBolsterContextType()
   render () {
     const { changeUser } = this.props
     return <div><button onClick={() => changeUser('Bob')}>Set user to Bob</button></div>
@@ -213,7 +213,7 @@ export default withMfxp(class MyClassComponent {
 })
 ```
 
-### `getMfxpContextType()` => ReactContext
+### `getBolsterContextType()` => ReactContext
 
 This is the least advised way to pull application state into a React component. It can assigned to `contextType`
 property of a React Component Class.
@@ -230,7 +230,7 @@ in the parent Container app like so:
 ```js
 // THIS IS A COMPONENT IN AN EXPERIENCE APP
 export default class MyClassComponent {
-  static contextType = getMfxpContextType()
+  static contextType = getBolsterContextType()
   render () {
     const { changeUser } = this.context
     return <div><button onClick={() => changeUser('Bob')}>Set user to Bob</button></div>
@@ -238,7 +238,7 @@ export default class MyClassComponent {
 }
 ```
 
-### `<MfxpConsumer/>` => ReactComponent
+### `<BolsterConsumer/>` => ReactComponent
 
 A [context consumer](https://reactjs.org/docs/context.html#contextconsumer) which can be used to get the application state for that a given Experience.
 
@@ -250,7 +250,7 @@ A [context consumer](https://reactjs.org/docs/context.html#contextconsumer) whic
 ```js
 // THIS IS A COMPONENT IN AN EXPERIENCE APP
 export default function MyComponent () {
-  return <MfxpConsumer>{({ changeUser }) => <button onClick={() => changeUser('Bob')}>Set user to Bob</button>}</MfxpConsumer>
+  return <BolsterConsumer>{({ changeUser }) => <button onClick={() => changeUser('Bob')}>Set user to Bob</button>}</BolsterConsumer>
 })
 ```
 
@@ -260,19 +260,19 @@ This can also be used with Class-based components:
 // THIS IS A COMPONENT IN AN EXPERIENCE APP
 export default class MyClassComponent {
   render () {
-    return <MfxpConsumer>{({ changeUser }) => <button onClick={() => changeUser('Bob')}>Set user to Bob</button>}</MfxpConsumer>
+    return <BolsterConsumer>{({ changeUser }) => <button onClick={() => changeUser('Bob')}>Set user to Bob</button>}</BolsterConsumer>
   }
 })
 ```
 
-### `<MfxpProvider/>` => ReactComponent
+### `<BolsterProvider/>` => ReactComponent
 
-Advanced use only. This is used internally by the `experience` function to assign Experience-specific application state to a given Experience. When handrolling the bootstrapping of an Experience the `MfxpProvider` would be needed to re-implement this same functionality.
+Advanced use only. This is used internally by the `experience` function to assign Experience-specific application state to a given Experience. When handrolling the bootstrapping of an Experience the `BolsterProvider` would be needed to re-implement this same functionality.
 
 
-### `mfxp.wrap(import('my-non-react-app/experience')) => LazyReactComponent`
+### `bolster.wrap(import('my-non-react-app/experience')) => LazyReactComponent`
 
-The `mfxp.wrap` function can be used to mount any-non React Microfrontend Experience into a Container application.
+The `bolster.wrap` function can be used to mount any-non React Microfrontend Experience into a Container application.
 
 Non-React Microfrontend Experiences can not use the [`experience`](#experiencerootcomponent-renderfunction-standaloneexperience) function for the bootstrapping
 entrypoint. They must instead export a `mount` function. 

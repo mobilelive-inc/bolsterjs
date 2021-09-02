@@ -7,11 +7,11 @@ import userEvent from '@testing-library/user-event'
 import { render, screen, cleanup } from '@testing-library/react'
 import { test, beforeEach } from 'tap'
 
-import mfxp from '..'
+import bolster from '..'
 
 beforeEach(cleanup)
 
-test('Mfxp wrapped experience inside of container does accesses global state using withMfxp', async () => {
+test('Bolster wrapped experience inside of container does accesses global state using withBolster', async () => {
   function SimpleRootPageComponent ({ welcome }) {
     return (
       <div>
@@ -26,14 +26,14 @@ test('Mfxp wrapped experience inside of container does accesses global state usi
       <div>
         <Router history={history}>
           <Switch>
-            <Route path='/' component={mfxp.withMfxp(SimpleRootPageComponent)} />
+            <Route path='/' component={bolster.withBolster(SimpleRootPageComponent)} />
           </Switch>
         </Router>
       </div>
     )
   }
 
-  const MFXPExperience = mfxp(mfxp.experience(SimpleExperience, render))
+  const BolsterExperience = bolster(bolster.experience(SimpleExperience, render))
 
   const history = createBrowserHistory()
 
@@ -44,7 +44,7 @@ test('Mfxp wrapped experience inside of container does accesses global state usi
           <Suspense fallback='...loading'>
             <Switch>
               <Route path='/'>
-                <MFXPExperience welcome='passes' />
+                <BolsterExperience welcome='passes' />
               </Route>
             </Switch>
           </Suspense>
@@ -57,7 +57,7 @@ test('Mfxp wrapped experience inside of container does accesses global state usi
   await screen.findByText('passes')
 })
 
-test('Mfxp wrapped experience inside of container does not access global state without useMfxp or withMfxp', async () => {
+test('Bolster wrapped experience inside of container does not access global state without useBolster or withBolster', async () => {
   function SimpleRootPageComponent ({ welcome }) {
     return (
       <div>
@@ -79,7 +79,7 @@ test('Mfxp wrapped experience inside of container does not access global state w
     )
   }
 
-  const MFXPExperience = mfxp(mfxp.experience(SimpleExperience, render))
+  const BolsterExperience = bolster(bolster.experience(SimpleExperience, render))
 
   const history = createBrowserHistory()
 
@@ -90,7 +90,7 @@ test('Mfxp wrapped experience inside of container does not access global state w
           <Suspense fallback='...loading'>
             <Switch>
               <Route path='/'>
-                <MFXPExperience welcome='passes' />
+                <BolsterExperience welcome='passes' />
               </Route>
             </Switch>
           </Suspense>
@@ -103,9 +103,9 @@ test('Mfxp wrapped experience inside of container does not access global state w
   await screen.findByText('fails')
 })
 
-test('Mfxp wrapped experience inside of container must access container props', async () => {
+test('Bolster wrapped experience inside of container must access container props', async () => {
   function SimpleRootPageComponent () {
-    const { welcome } = mfxp.useMfxp()
+    const { welcome } = bolster.useBolster()
     return (
       <div>
         <h3>Simple Component</h3>
@@ -126,7 +126,7 @@ test('Mfxp wrapped experience inside of container must access container props', 
     )
   }
 
-  const MFXPExperience = mfxp(mfxp.experience(SimpleExperience, render))
+  const BolsterExperience = bolster(bolster.experience(SimpleExperience, render))
 
   const history = createBrowserHistory()
 
@@ -137,7 +137,7 @@ test('Mfxp wrapped experience inside of container must access container props', 
           <Suspense fallback='...loading'>
             <Switch>
               <Route path='/'>
-                <MFXPExperience welcome='passes' />
+                <BolsterExperience welcome='passes' />
               </Route>
             </Switch>
           </Suspense>
@@ -150,7 +150,7 @@ test('Mfxp wrapped experience inside of container must access container props', 
   await screen.findByText('passes')
 })
 
-test('Mfxp wrapped experience uses react router to navigate properly', async () => {
+test('Bolster wrapped experience uses react router to navigate properly', async () => {
   function About ({ history }) {
     return (
       <Router history={history}>
@@ -176,8 +176,8 @@ test('Mfxp wrapped experience uses react router to navigate properly', async () 
     )
   }
 
-  const MFXPAboutExp = mfxp(mfxp.experience(About, render))
-  const MFXPHomeExp = mfxp(mfxp.experience(Home, render))
+  const BolsterAboutExp = bolster(bolster.experience(About, render))
+  const BolsterHomeExp = bolster(bolster.experience(Home, render))
 
   function App () {
     return (
@@ -189,10 +189,10 @@ test('Mfxp wrapped experience uses react router to navigate properly', async () 
             <Switch>
 
               <Route path='/about'>
-                <MFXPAboutExp />
+                <BolsterAboutExp />
               </Route>
               <Route path='/'>
-                <MFXPHomeExp />
+                <BolsterHomeExp />
               </Route>
 
             </Switch>
