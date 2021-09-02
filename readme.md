@@ -308,9 +308,9 @@ if (process.env.NODE_ENV === 'development') {
 In order to generate an initial project initialize the `bolster` binary with the arguments `create` and the name of your project.
 
 ```sh
-npx @mobilelive-inc/bolster create <name of project>
+npx @mobilelive-inc/bolsterjs create <name of project>
 ```
 
-You can also install `@mobilelive-inc/bolster` in your global `node_modules` and execute `bolster create <name of project>`.
+You can also install `@mobilelive-inc/bolsterjs` in your global `node_modules` and execute `bolsterjs create <name of project>`.
 
 Once a project has being generated simply follow the instructions on your command line, and start creating your micro frontend application.
