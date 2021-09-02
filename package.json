@@ -18,7 +18,7 @@
   "directories": {},
   "keywords": [],
   "author": "",
-  "license": "UNKNOWN",
+  "license": "MIT",
   "dependencies": {
     "@mobilelive-inc/bolsterjs-generator": "1.0.0",
     "ansi-colors": "^4.1.1",
