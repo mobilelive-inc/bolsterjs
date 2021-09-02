@@ -1,5 +1,5 @@
   
-Usage: mfxp create [app name]
+Usage: bolsterjs create [app name]
 
-Generates a sample MXFP named [app name] micro frontend application
+Generates a sample BolsterJS named [app name] micro frontend application
 with a simple configuration.

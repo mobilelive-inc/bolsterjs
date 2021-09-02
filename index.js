@@ -4,7 +4,7 @@ const { useHistory } = peerRequireRrd()
 const { createMemoryHistory, createBrowserHistory } = peerRequireHistory()
 const { useRef, useEffect, createElement, createContext, useContext, lazy } = peerRequireReact()
 const Rsr = require('react-shallow-renderer')
-const kBolster = Symbol.for('bolster')
+const kBolster = Symbol.for('bolsterjs')
 global[kBolster] = global[kBolster] || createContext({})
 
 const defaultErrorHandler = ({ err }) => createElement('div', null, `Error Loading Experience: "${err.message}"`)

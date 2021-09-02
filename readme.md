@@ -47,7 +47,7 @@ a [React Router](https://reactrouter.com/) component.
 import React, { Suspense } from 'react'
 import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
-import bolster from 'bolster'
+import bolster from '@mobilelive-inc/bolsterjs'
 const history = createBrowserHistory()
 const HomeExperience = bolster(import('home/experience'))
 const BookingExperience = bolster(import('booking/experience'))
@@ -116,7 +116,7 @@ The `./src/bootstrap.js` file can use `experience` as follows:
 ```js
 import ReactDOM from 'react-dom'
 import App from './App'
-import { experience } from 'bolster'
+import { experience } from '@mobilelive-inc/bolsterjs'
 
 export default experience(App, ReactDOM.render)
 ```
@@ -133,7 +133,7 @@ only every be passed to the `experience` function.
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import { experience } from 'bolster'
+import { experience } from '@mobilelive-inc/bolsterjs'
 
 export default experience(
   App, 

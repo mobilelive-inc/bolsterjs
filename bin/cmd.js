@@ -7,7 +7,7 @@ const path = require('path')
 const help = require('help-me')({
   dir: path.join(path.dirname(require.main.filename), '../', 'help')
 })
-const MFXPCmd = require('@mobilelive-inc/mfxp-generator')
+const BolsterCmd = require('@mobilelive-inc/bolsterjs-generator')
 const { red, green, yellow, blueBright } = require('ansi-colors')
 
 const levels = {
@@ -27,7 +27,7 @@ function log (severity, line) {
   console[severity](colors[level](line))
 }
 
-const result = cmd.register('create', MFXPCmd.create.cli(log))
+const result = cmd.register('create', BolsterCmd.create.cli(log))
   .register('version', function () {
     console.log(require('../package.json').version)
   })
