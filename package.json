@@ -1,10 +1,10 @@
 {
-  "name": "bolster",
+  "name": "@mobilelive-inc/bolsterjs",
   "version": "",
   "description": "Microfrontend Experiences",
   "main": "index.js",
   "bin": {
-    "bolster": "./bin/cmd.js"
+    "bolsterjs": "./bin/cmd.js"
   },
   "esm": {
     "cjs": true
@@ -22,7 +22,7 @@
   "author": "",
   "license": "UNKNOWN",
   "dependencies": {
-    "@mobilelive-inc/mfxp-generator": "^0.0.0-rc.9",
+    "@mobilelive-inc/bolsterjs-generator": "1.0.0",
     "ansi-colors": "^4.1.1",
     "commist": "^2.0.0",
     "globalthis": "^1.0.2",
@@ -46,10 +46,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mobilelive-inc/mfxp.git"
+    "url": "git+https://github.com/mobilelive-inc/bolsterjs.git"
   },
   "bugs": {
-    "url": "https://github.com/mobilelive-inc/mfxp/issues"
+    "url": "https://github.com/mobilelive-inc/bolsterjs/issues"
   },
-  "homepage": "https://github.com/mobilelive-inc/mfxp#readme"
+  "homepage": "https://github.com/mobilelive-inc/bolsterjs#readme"
 }

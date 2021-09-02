@@ -4,12 +4,12 @@ const { useHistory } = peerRequireRrd()
 const { createMemoryHistory, createBrowserHistory } = peerRequireHistory()
 const { useRef, useEffect, createElement, createContext, useContext, lazy } = peerRequireReact()
 const Rsr = require('react-shallow-renderer')
-const kMfxp = Symbol.for('mfxp')
-global[kMfxp] = global[kMfxp] || createContext({})
+const kBolster = Symbol.for('bolsterjs')
+global[kBolster] = global[kBolster] || createContext({})
 
 const defaultErrorHandler = ({ err }) => createElement('div', null, `Error Loading Experience: "${err.message}"`)
 
-const mfxp = (experience, errorHandler = defaultErrorHandler) => lazy(async () => {
+const bolster = (experience, errorHandler = defaultErrorHandler) => lazy(async () => {
   try {
     const bootstrap = await experience
     const { mount = bootstrap.mount } = bootstrap.default || {}
@@ -41,7 +41,7 @@ const mfxp = (experience, errorHandler = defaultErrorHandler) => lazy(async () =
   }
 })
 
-mfxp.wrap = (experience) => lazy(async () => {
+bolster.wrap = (experience) => lazy(async () => {
   const { mount } = await experience
   return {
     default: function (props) {
@@ -56,33 +56,33 @@ mfxp.wrap = (experience) => lazy(async () => {
   }
 })
 
-mfxp.MfxpConsumer = ({ children }) => {
-  return createElement(global[kMfxp].Consumer, { children: children })
+bolster.BolsterConsumer = ({ children }) => {
+  return createElement(global[kBolster].Consumer, { children: children })
 }
 
-mfxp.MfxpProvider = ({ state, children }) => {
-  return createElement(global[kMfxp].Provider, { value: state, children: children })
+bolster.BolsterProvider = ({ state, children }) => {
+  return createElement(global[kBolster].Provider, { value: state, children: children })
 }
 
-mfxp.useMfxp = () => {
-  return useContext(global[kMfxp])
+bolster.useBolster = () => {
+  return useContext(global[kBolster])
 }
 
-mfxp.withMfxp = (cmp) => {
+bolster.withBolster = (cmp) => {
   return (props) => {
-    return createElement(cmp, { ...props, ...mfxp.useMfxp() })
+    return createElement(cmp, { ...props, ...bolster.useBolster() })
   }
 }
 
-mfxp.getMfxpContextType = () => global[kMfxp]
+bolster.getBolsterContextType = () => global[kBolster]
 
-mfxp.StandaloneExperience = (props) => createElement('div', props)
+bolster.StandaloneExperience = (props) => createElement('div', props)
 
-mfxp.experience = (root, render, standalone = {}) => {
+bolster.experience = (root, render, standalone = {}) => {
   const re = new Rsr()
 
   const inject = (el, history, state) => {
-    const tree = createElement(mfxp.MfxpProvider, {
+    const tree = createElement(bolster.BolsterProvider, {
       state: state,
       children: createElement(root, { history })
     })
@@ -118,7 +118,7 @@ mfxp.experience = (root, render, standalone = {}) => {
   return { mount }
 }
 
-module.exports = mfxp
+module.exports = bolster
 
 // A variable/param can't be used to genericise these functions into one function
 // strings must be passed to `require` for WebPack.
@@ -126,7 +126,7 @@ function peerRequireRrd () {
   try {
     return require('react-router-dom')
   } catch {
-    throw Error('react-router-dom is a required peer dependency of mfxp')
+    throw Error('react-router-dom is a required peer dependency of bolster')
   }
 }
 
@@ -134,7 +134,7 @@ function peerRequireHistory () {
   try {
     return require('history')
   } catch {
-    throw Error('history is a required peer dependency of mfxp')
+    throw Error('history is a required peer dependency of bolster')
   }
 }
 
@@ -142,6 +142,6 @@ function peerRequireReact () {
   try {
     return require('react')
   } catch {
-    throw Error('react is a required peer dependency of mfxp')
+    throw Error('react is a required peer dependency of bolster')
   }
 }
